@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc mừng 20/10 - Chị yêu</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', 'Georgia', 'Palatino', serif;
+            overflow: hidden;
+            background: #000;
+        }
+
+        /* Pages Container */
+        .pages-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .page.active {
+            opacity: 1;
+            pointer-events: all;
+            z-index: 10;
+        }
+
+        /* Page 1 - Intro với hiệu ứng mở màn */
+        #page1 {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0c29 100%);
+        }
+
+        .intro-content {
+            text-align: center;
+            color: white;
+        }
+
+        .intro-date {
+            font-size: 120px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ff1493, #ff69b4, #ffb6c1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 0 30px rgba(255, 20, 147, 0.8));
+        }
+
+        .intro-title {
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #ffb6c1;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .start-button {
+            background: linear-gradient(135deg, #ff1493, #ff69b4);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 22px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 40px rgba(255, 20, 147, 0.6);
+            animation: pulse 2s ease-in-out infinite, fadeInUp 1s ease 1s both;
+            transition: all 0.3s ease;
+        }
+
+        .start-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(255, 20, 147, 0.8);
+        }
+
+        /* Page 2 - Album ảnh */
+        #page2 {
+            background: linear-gradient(135deg, #fff0f8 0%, #ffe5f1 50%, #ffd6e8 100%);
+        }
+
+        .photo-album {
+            text-align: center;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        .album-title {
+            font-size: 48px;
+            color: #ff1493;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .photo-frame {
+            width: 400px;
+            height: 400px;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(255, 20, 147, 0.3);
+            margin: 0 auto 30px;
+            animation: zoomIn 0.8s ease 0.3s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 80px;
+            animation: photoReveal 1s ease 0.8s both;
+        }
+
+        /* Nếu có ảnh thật, dùng class này */
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .photo-caption {
+            font-size: 20px;
+            color: #ff1493;
+            font-style: italic;
+            animation: fadeInUp 0.8s ease 1.3s both;
+            margin-bottom: 30px;
+        }
+
+        /* Page 3 - Lời chúc trái tim */
+        #page3 {
+            background: rgb(223, 94, 115);
+        }
+
+        .heart-message {
+            text-align: center;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        .big-heart {
+            font-size: 150px;
+            animation: heartBeat 1.5s ease infinite;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.5));
+        }
+
+        .message-title {
+            font-size: 42px;
+            color: white;
+            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease 0.5s both;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .message-text {
+            font-size: 22px;
+            color: white;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease 1s both;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Page 4 - Hoa rơi */
+        #page4 {
+            background: linear-gradient(135deg, #ffd6e8 0%, #ffb6c1 100%);
+            overflow: hidden;
+        }
+
+        .flower-content {
+            text-align: center;
+            max-width: 700px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(255, 20, 147, 0.4);
+            animation: slideInUp 0.8s ease;
+            position: relative;
+            z-index: 5;
+        }
+
+        .flower-rain {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            animation: fall linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0.8;
+            }
+        }
+
+        /* Page 5 - Gift Box bất ngờ */
+        #page5 {
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+        }
+
+        .gift-box {
+            text-align: center;
+            animation: slideInDown 0.8s ease;
+        }
+
+        .box {
+            font-size: 200px;
+            cursor: pointer;
+            animation: shake 2s ease-in-out infinite;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+        }
+
+        .box:hover {
+            transform: scale(1.1);
+        }
+
+        .box.opened {
+            animation: giftOpen 1s ease forwards;
+            display:  none;
+        }
+        .box.closed {
+            display: none;
+        }
+        @keyframes giftOpen {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.3) rotate(180deg); }
+            100% { transform: scale(0) rotate(360deg); opacity: 0; }
+        }
+
+        .surprise-message {
+            opacity: 0;
+            transform: scale(0);
+            transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            color: white;
+            font-size: 32px;
+            margin-top: 50px;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .surprise-message.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Page 6 - Final với confetti */
+        #page6 {
+            background: linear-gradient(135deg, #ffd6e8 0%, #ffe5f1 50%, #fff0f8 100%);
+        }
+
+        .final-content {
+            text-align: center;
+            max-width: 700px;
+            padding: 40px;
+            animation: fadeIn 1s ease;
+        }
+
+        .final-title {
+            font-size: 56px;
+            color: #ff1493;
+            margin-bottom: 30px;
+            animation: bounceIn 1s ease;
+        }
+
+        .final-message {
+            font-size: 24px;
+            color: #666;
+            line-height: 2;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .signature {
+            font-size: 28px;
+            color: #ff69b4;
+            font-style: italic;
+            animation: fadeInUp 1s ease 1s both;
+        }
+
+        /* Swipe hint */
+        .swipe-hint {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+            text-align: center;
+            z-index: 100;
+            animation: hintFade 3s ease-in-out infinite;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px 25px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .swipe-hint.hidden {
+            opacity: 0;
+            transform: translateX(-50%) translateY(20px);
+            pointer-events: none;
+        }
+
+        @keyframes hintFade {
+            0%, 100% { opacity: 0.6; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 1; transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Swipe indicator arrows */
+        .swipe-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        .swipe-arrow.left {
+            left: 20px;
+        }
+
+        .swipe-arrow.right {
+            right: 20px;
+        }
+
+        .pages-container:active .swipe-arrow {
+            opacity: 0.3;
+        }
+
+        /* Progress indicator */
+        .progress-dots {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #ff1493;
+            transform: scale(1.5);
+            box-shadow: 0 0 15px rgba(255, 20, 147, 0.8);
+        }
+
+        /* Confetti */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff69b4;
+            animation: confettiFall 3s linear infinite;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Particles floating */
+        .particle {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            animation: particleFloat 8s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateY(-100px) translateX(var(--drift));
+                opacity: 0;
+            }
+        }
+
+        /* Common Animations */
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 30px rgba(255, 20, 147, 0.8)); }
+            50% { filter: drop-shadow(0 0 50px rgba(255, 20, 147, 1)); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes photoReveal {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) rotateY(90deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotateY(0deg);
+            }
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.05); }
+        }
+
+        @keyframes slideInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .intro-date { font-size: 80px; }
+            .intro-title { font-size: 28px; }
+            .start-button { padding: 15px 40px; font-size: 18px; }
+            .album-title { font-size: 36px; }
+            .photo-frame { width: 300px; height: 300px; }
+            .photo-placeholder { font-size: 60px; }
+            .big-heart { font-size: 100px; }
+            .message-title { font-size: 32px; }
+            .message-text { font-size: 18px; }
+            .box { font-size: 150px; }
+            .final-title { font-size: 42px; }
+            .final-message { font-size: 20px; }
+            .nav-btn { padding: 10px 25px; font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Dots -->
+    <div class="progress-dots">
+        <div class="dot active" data-page="1"></div>
+        <div class="dot" data-page="2"></div>
+        <div class="dot" data-page="3"></div>
+        <div class="dot" data-page="4"></div>
+        <div class="dot" data-page="5"></div>
+        <div class="dot" data-page="6"></div>
+        <div class="dot" data-page="7"></div>
+        <div class="dot" data-page="8"></div>
+        <div class="dot" data-page="9"></div>
+        <div class="dot" data-page="10"></div>
+        <div class="dot" data-page="11"></div>
+    </div>
+
+    <!-- Swipe Hint -->
+    <div class="swipe-hint" id="swipeHint">
+        👈 Vuốt để xem tiếp 👉
+    </div>
+ <!-- Swipe Arrows -->
+    <div class="swipe-arrow left">⬅️</div>
+    <div class="swipe-arrow right">➡️</div>
+
+    
+    <!-- Pages Container -->
+    <div class="pages-container">
+        <!-- Page 1: Intro -->
+        <div class="page active" id="page1">
+            <div class="intro-content">
+                <div class="intro-date">20/10</div>
+                <div class="intro-title">Một ngày đặc biệt dành cho chị ❤️</div>
+                <button class="start-button" onclick="nextPage()">
+                    ✨ Bắt đầu
+                </button>
+            </div>
+        </div>
+
+        <!-- Page 2: Photo Album -->
+        <div class="page" id="page2">
+            <div class="photo-album">
+                <div class="album-title">
+                    <p>📸 Khoảnh khắc đẹp</p> 
+                      </div>
+                <div class="photo-frame">
+                    <div class="photo-placeholder">
+                       
+                        <img src="" alt="Chị gái">
+                       
+                       
+                    </div>
+                </div>
+                <div class="photo-caption">
+                    "Chị luôn là người phụ nữ đẹp nhất trong mắt em"
+                </div>
+            </div>
+        </div>
+        <div class="page" id="page3">
+            <div class="photo-album">
+                <div class="album-title">
+                    <p>📸 Khoảnh khắc đẹp</p> 
+                      </div>
+                <div class="photo-frame">
+                    <div class="photo-placeholder">
+                       
+                        <img src="" alt="Chị gái">
+                       
+                       
+                    </div>
+                </div>
+                <div class="photo-caption">
+                    "Chị luôn là người phụ nữ đẹp nhất trong mắt em"
+                </div>
+            </div>
+        </div>
+        <div class="page" id="page4">
+            <div class="photo-album">
+                <div class="album-title">
+                    <p>📸 Khoảnh khắc đẹp</p> 
+                      </div>
+                <div class="photo-frame">
+                    <div class="photo-placeholder">
+                       
+                        <img src="" alt="Chị gái">
+                       
+                       
+                    </div>
+                </div>
+                <div class="photo-caption">
+                    "Chị luôn là người phụ nữ đẹp nhất trong mắt em"
+                </div>
+            </div>
+        </div>
+        <div class="page" id="page5">
+            <div class="photo-album">
+                <div class="album-title">
+                    <p>📸 Khoảnh khắc đẹp</p> 
+                      </div>
+                <div class="photo-frame">
+                    <div class="photo-placeholder">
+                       
+                        <img src="" alt="Chị gái">
+                       
+                       
+                    </div>
+                </div>
+                <div class="photo-caption">
+                    "Chị luôn là người phụ nữ đẹp nhất trong mắt em"
+                </div>
+            </div>
+        </div>
+        <div class="page" id="page6">
+            <div class="photo-album">
+                <div class="album-title">
+                    <p>📸 Khoảnh khắc đẹp</p> 
+                      </div>
+                <div class="photo-frame">
+                    <div class="photo-placeholder">
+                       
+                        <img src="" alt="Chị gái">
+                       
+                       
+                    </div>
+                </div>
+                <div class="photo-caption">
+                    "Chị luôn là người phụ nữ đẹp nhất trong mắt em"
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 3: Heart Message -->
+        <div class="page" id="page7">
+            <div class="heart-message">
+                <div class="big-heart">💖</div>
+                <div class="message-title">Lời chúc từ trái tim</div>
+                <div class="message-text">
+                    Chị ơi!<br>
+                    Em biết chị là người phụ nữ mạnh mẽ nhất,<br>
+                    luôn vượt qua mọi khó khăn với nụ cười.<br>
+                    Chúc chị luôn xinh đẹp, tự tin và thành công!<br>
+                    Em yêu chị nhiều lắm! 💕
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 4: Flower Rain -->
+        <div class="page" id="page8">
+            <div class="flower-content">
+                <h1 style="color: #ff1493; font-size: 48px; margin-bottom: 30px;">🌸 Hoa dành tặng chị 🌸</h1>
+                <p style="font-size: 22px; color: #666; line-height: 1.8;">
+                    Những bông hoa này tượng trưng cho sự trân trọng<br>
+                    và tình yêu thương mà em dành cho chị.<br>
+                    Chúc chị luôn rạng rỡ như những đóa hoa này! 🌹
+                </p>
+            </div>
+        </div>
+
+        <!-- Page 5: Gift Box Surprise -->
+        <div class="page" id="page9">
+            <div class="gift-box">
+                <h2 style="color: white; font-size: 42px; margin-bottom: 30px; animation: fadeInDown 0.8s ease;">
+                    🎁 Món quà bất ngờ dành cho chị
+                </h2>
+                <div class="box" onclick="openGift()">🎁</div>
+                <div class="surprise-message">
+                    <h3 style="font-size: 48px; margin-bottom: 20px;">🎉 SURPRISE! 🎉</h3>
+                    <p style="font-size: 24px;">
+                        Món quà thật sự là tình yêu thương<br>
+                        và sự quan tâm của em dành cho chị!<br>
+                        ❤️ Em luôn ở đây vì chị! ❤️
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 6: Final -->
+        <div class="page" id="page10">
+            <div class="final-content">
+                <div class="final-title">💐 Chúc mừng 20/10 💐</div>
+                <div class="final-message">
+                    Cảm ơn chị đã luôn là người chị gái tuyệt vời,<br>
+                    luôn yêu thương, dạy dỗ và bảo vệ em.<br>
+                    Em chúc chị luôn hạnh phúc, xinh đẹp và thành công!<br>
+                    Mãi mãi yêu chị! 💕
+                </div>
+                <div class="signature">
+                    ~ Với tình yêu thương vô bờ ~<br>
+                    💝 Em của chị 💝
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const totalPages = 11;
+        let giftOpened = false;
+        let hintShown = false; // Track if hint has been shown
+
+        // Touch/Swipe variables
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let touchStartY = 0;
+        let touchEndY = 0;
+        const minSwipeDistance = 50;
+
+        // Mouse drag variables
+        let mouseStartX = 0;
+        let isDragging = false;
+
+        function updatePage() {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show current page
+            document.getElementById(`page${currentPage}`).classList.add('active');
+
+            // Update progress dots
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                if (index + 1 === currentPage) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+
+            // Always hide hint after leaving page 1
+            const hint = document.getElementById('swipeHint');
+            if (currentPage !== 1) {
+                hint.classList.add('hidden');
+            }
+
+            // Page specific effects
+            if (currentPage === 4) {
+                startFlowerRain();
+            }
+            if (currentPage === 6) {
+                startConfetti();
+            }
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                hintShown = true; // Mark hint as shown when user swipes
+                currentPage++;
+                updatePage();
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                hintShown = true; // Mark hint as shown when user swipes
+                currentPage--;
+                updatePage();
+                if (currentPage === 5) {
+                    giftOpened = false;
+                }
+            }
+        }
+
+        // Touch event handlers
+        function handleTouchStart(e) {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }
+
+        function handleTouchEnd(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }
+
+        // Mouse event handlers
+        function handleMouseDown(e) {
+            isDragging = true;
+            mouseStartX = e.clientX;
+        }
+
+        function handleMouseUp(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            const mouseEndX = e.clientX;
+            const deltaX = mouseStartX - mouseEndX;
+            
+            if (Math.abs(deltaX) > minSwipeDistance) {
+                if (deltaX > 0) {
+                    // Swipe left - next page
+                    nextPage();
+                } else {
+                    // Swipe right - previous page
+                    prevPage();
+                }
+            }
+        }
+
+        function handleMouseLeave() {
+            isDragging = false;
+        }
+
+        function handleSwipe() {
+            const deltaX = touchStartX - touchEndX;
+            const deltaY = touchStartY - touchEndY;
+            
+            // Check if horizontal swipe is dominant
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+                if (deltaX > 0) {
+                    // Swipe left - next page
+                    nextPage();
+                } else {
+                    // Swipe right - previous page
+                    prevPage();
+                }
+            }
+        }
+
+        // Add event listeners
+        const container = document.querySelector('.pages-container');
+        
+        // Touch events for mobile
+        container.addEventListener('touchstart', handleTouchStart, false);
+        container.addEventListener('touchend', handleTouchEnd, false);
+        
+        // Mouse events for desktop
+        container.addEventListener('mousedown', handleMouseDown, false);
+        container.addEventListener('mouseup', handleMouseUp, false);
+        container.addEventListener('mouseleave', handleMouseLeave, false);
+
+        function openGift() {
+            if (giftOpened) return;
+            giftOpened = true;
+          
+            const box = document.querySelector('.box');
+            const surprise = document.querySelector('.surprise-message');
+            
+            box.classList.add('opened');
+            setTimeout(() => {
+                box.style.display = 'none';
+            }, 900);
+            setTimeout(() => {
+                surprise.classList.add('show');
+                createFireworks();
+            }, 1000);
+        }
+
+        function startFlowerRain() {
+            const flowers = ['🌸', '🌺', '🌹', '🌷', '🌼', '💐'];
+            let count = 0;
+            const maxFlowers = 30;
+            
+            const interval = setInterval(() => {
+                if (count >= maxFlowers) {
+                    clearInterval(interval);
+                    return;
+                }
+                
+                const flower = document.createElement('div');
+                flower.className = 'flower-rain';
+                flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+                flower.style.left = Math.random() * 100 + '%';
+                flower.style.animationDuration = (3 + Math.random() * 3) + 's';
+                flower.style.animationDelay = Math.random() * 2 + 's';
+                
+                document.getElementById('page4').appendChild(flower);
+                
+                setTimeout(() => flower.remove(), 8000);
+                count++;
+            }, 200);
+        }
+
+        function startConfetti() {
+            const colors = ['#ff69b4', '#ff1493', '#ffb6c1', '#ffd700', '#ff6b6b', '#4ecdc4'];
+            let count = 0;
+            const maxConfetti = 50;
+            
+            const interval = setInterval(() => {
+                if (count >= maxConfetti) {
+                    clearInterval(interval);
+                    return;
+                }
+                
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (2 + Math.random() * 2) + 's';
+                confetti.style.animationDelay = Math.random() * 1 + 's';
+                
+                document.getElementById('page6').appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 5000);
+                count++;
+            }, 100);
+        }
+
+        function createFireworks() {
+            const colors = ['#ff69b4', '#ff1493', '#ffd700', '#ff6b6b'];
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement('div');
+                    firework.style.position = 'absolute';
+                    firework.style.width = '10px';
+                    firework.style.height = '10px';
+                    firework.style.borderRadius = '50%';
+                    firework.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    firework.style.left = '50%';
+                    firework.style.top = '50%';
+                    firework.style.pointerEvents = 'none';
+                    
+                    const angle = (Math.PI * 2 * i) / 30;
+                    const velocity = 100 + Math.random() * 100;
+                    const vx = Math.cos(angle) * velocity;
+                    const vy = Math.sin(angle) * velocity;
+                    
+                    document.getElementById('page5').appendChild(firework);
+                    
+                    let opacity = 1;
+                    let x = 0, y = 0;
+                    
+                    const animate = setInterval(() => {
+                        x += vx / 30;
+                        y += vy / 30;
+                        opacity -= 0.02;
+                        
+                        firework.style.transform = `translate(${x}px, ${y}px)`;
+                        firework.style.opacity = opacity;
+                        
+                        if (opacity <= 0) {
+                            clearInterval(animate);
+                            firework.remove();
+                        }
+                    }, 16);
+                }, i * 30);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                hintShown = true;
+                nextPage();
+            }
+            if (e.key === 'ArrowLeft') {
+                hintShown = true;
+                prevPage();
+            }
+        });
+
+        // Initialize
+        updatePage();
+
+        // Auto hide hint after 5 seconds on page 1
+        setTimeout(() => {
+            const hint = document.getElementById('swipeHint');
+            if (currentPage === 1 && !hintShown) {
+                hint.classList.add('hidden');
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
