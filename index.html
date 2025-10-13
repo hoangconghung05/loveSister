@@ -847,8 +847,13 @@
             <source src="Đến Giờ Cơm.mp3" type="audio/mpeg">
         </audio>
     </div>
+    <!-- Music Controls -->
+    <div id="music-controls">
+        <button onclick="toggleMusic()">🎵 Bật/Tắt Nhạc</button>
+    </div>
+
     <script>
-        const music = document.getElementById('background-music');
+        const music = document.getElementById('bgMusic');
 
         function toggleMusic() {
             if (music.paused) {
