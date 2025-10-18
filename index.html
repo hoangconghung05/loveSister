@@ -643,15 +643,7 @@
         <div class="dot" data-page="11"></div>
     </div>
 
-    <!-- Swipe Hint -->
-    <div class="swipe-hint" id="swipeHint">
-        👈 Vuốt để xem tiếp 👉
-    </div>
- <!-- Swipe Arrows -->
-    <div class="swipe-arrow left">⬅️</div>
-    <div class="swipe-arrow right">➡️</div>
-
-    
+   
     <!-- Pages Container -->
     <div class="pages-container">
         <!-- Page 1: Intro -->
@@ -914,6 +906,11 @@
             if (currentPage === 6) {
                 startConfetti();
             }
+            if (currentPage === 10) {
+                setTimeout(() => {
+                    openGift();
+                }, 1000); // Tự động mở hộp sau 3 giây
+            }
         }
 
         function nextPage() {
@@ -1133,6 +1130,28 @@
                 hint.classList.add('hidden');
             }
         }, 5000);
+    </script>
+    <script>
+        let autoSlideInterval;
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
+                if (currentPage < totalPages) {
+                    nextPage();
+                } else {
+                    clearInterval(autoSlideInterval); // Dừng khi đến trang cuối
+                }
+            }, 5000); // Chuyển trang sau mỗi 5 giây
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+
+        // Bắt đầu tự động chuyển trang khi tải trang
+        document.addEventListener('DOMContentLoaded', () => {
+            startAutoSlide();
+        });
     </script>
 </body>
 </html>
