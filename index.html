@@ -1153,5 +1153,22 @@
             startAutoSlide();
         });
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const music = document.getElementById('bgMusic');
+
+            // Cố gắng phát nhạc tự động
+            const playMusic = () => {
+                music.play().catch(error => {
+                    console.warn('Trình duyệt chặn phát nhạc tự động. Người dùng cần tương tác để phát nhạc.');
+                });
+            };
+
+            // Kiểm tra nếu trình duyệt hỗ trợ phát nhạc tự động
+            if (music) {
+                playMusic();
+            }
+        });
+    </script>
 </body>
 </html>
